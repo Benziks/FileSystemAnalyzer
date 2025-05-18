@@ -1,0 +1,125 @@
+﻿<!--Словник для української мови-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Головне меню-->
+    <sys:String x:Key="StartAnalysis">Розпочати аналіз</sys:String>
+    <sys:String x:Key="Settings">Налаштування</sys:String>
+    <sys:String x:Key="Exit">Вихід</sys:String>
+
+    <!--Налаштування-->
+    <sys:String x:Key="LanguageLabel">Мова</sys:String>
+    <sys:String x:Key="ThemeButton">Змінити тему</sys:String>
+    <sys:String x:Key="FAQ">FAQ</sys:String>
+    <sys:String x:Key="Back">Назад</sys:String>
+
+    <!--Вибір аналізу-->
+    <sys:String x:Key="FullAnalysis">Аналіз усієї системи</sys:String>
+    <sys:String x:Key="QuickAnalysis">Швидкий аналіз (Робочий стіл та Завантаження)</sys:String>
+    <sys:String x:Key="SelectiveAnalysis">Вибірковий аналіз</sys:String>
+
+    <!--Діалогові вікна-->
+    <sys:String x:Key="SelectDrivesTitle">Виберіть диски</sys:String>
+    <sys:String x:Key="SelectFoldersTitle">Вибір папок</sys:String>
+    <sys:String x:Key="SelectFormatsTitle">Виберіть формати для аналізу:</sys:String>
+
+    <!--Кнопки у діалогових вікнах-->
+    <sys:String x:Key="AnalyzeButton">Аналіз</sys:String>
+    <sys:String x:Key="CancelButton">Скасування</sys:String>
+    <sys:String x:Key="SelectAll">Вибрати все</sys:String>
+    <sys:String x:Key="ClearSelection">Очистити вибір</sys:String>
+
+    <!--DataGrid колонки-->
+    <sys:String x:Key="ColumnName">Ім'я</sys:String>
+    <sys:String x:Key="ColumnType">Тип</sys:String>
+    <sys:String x:Key="ColumnSize">Пам'ять</sys:String>
+    <sys:String x:Key="ColumnCreation">Дата створення</sys:String>
+    <sys:String x:Key="ColumnAccess">Дата доступу</sys:String>
+    <sys:String x:Key="ColumnPath">Шлях</sys:String>
+
+    <!--Кнопки експорту та угруповання дублікатів-->
+    <sys:String x:Key="ExportData">Експорт даних (.txt)</sys:String>
+    <sys:String x:Key="ExportChart">Експорт графіків (.png)</sys:String>
+    <sys:String x:Key="GroupDuplicates">Групувати дубликати</sys:String>
+
+    <!--DriveSelectionWindow.xaml-->
+    <sys:String x:Key="DrvSelect_Title">Виберіть диски</sys:String>
+    <sys:String x:Key="DrvSelect_Analyze">Аналіз</sys:String>
+
+    <!--DriveSelectionWindow.cs-->
+    <sys:String x:Key="Drv_NoChoice">Потрібно вибрати хоча б один диск.</sys:String>
+    <sys:String x:Key="Warning_Title">Увага</sys:String>
+
+    <!--FolderSelectionWindow.xaml-->
+    <sys:String x:Key="FldSelect_Title">Вибір папок</sys:String>
+    <sys:String x:Key="FldSelect_Add">Додати папку</sys:String>
+    <sys:String x:Key="FldSelect_Remove">Видалити вибрану</sys:String>
+    <sys:String x:Key="FldSelect_Next">Далі</sys:String>
+
+    <!--FolderSelectionWindow.cs-->
+    <sys:String x:Key="FolderWindow_Title">Вибір папок</sys:String>
+    <sys:String x:Key="Fld_NoChoice">Потрібно вибрати хоча б одну папку.</sys:String>
+    <sys:String x:Key="Fld_NoFiles">У вибраних папках немає жодного файлу. Додайте хоча б одну папку з файлами.</sys:String>
+
+    <!--FormatSelectionWindow.xaml-->
+    <sys:String x:Key="FmtSelect_Title">Вибір форматів</sys:String>
+    <sys:String x:Key="FmtSelect_Header">Виберіть формати для аналізу:</sys:String>
+    <sys:String x:Key="FmtSelect_SelectAll">Вибрати все</sys:String>
+    <sys:String x:Key="FmtSelect_Clear">Очистити вибір</sys:String>
+    <sys:String x:Key="FmtSelect_Analyze">Аналіз</sys:String>
+
+    <!--FormatSelectionWindow.cs-->
+    <sys:String x:Key="Fmt_NoChoice">Виберіть хоча б один формат.</sys:String>
+    <sys:String x:Key="FormatWindow_Title">Вибір форматів</sys:String>
+
+    <!--DialogService.cs / MainWindow.cs-->
+    <sys:String x:Key="Confirm_Title">Підтвердження</sys:String>
+    <sys:String x:Key="OpenFolder">Відкрити папку</sys:String>
+    <sys:String x:Key="DeleteFile_Confirm">Видалити файл?</sys:String>
+    <sys:String x:Key="Context_OpenFolder">Відкрити папку</sys:String>
+    <sys:String x:Key="Context_DeleteFile">Видалити файл</sys:String>
+
+    <!--ChartService.cs-->
+    <sys:String x:Key="Chart_Bar_Title">Розподіл типів файлів (МБ)</sys:String>
+    <sys:String x:Key="Chart_Line_Title">Динаміка створення файлів</sys:String>
+    <sys:String x:Key="Axis_Size">МБ</sys:String>
+    <sys:String x:Key="Axis_Count">Кількість файлів</sys:String>
+    <sys:String x:Key="Label_Missing">[Відсутні]</sys:String>
+    <sys:String x:Key="Label_Others">[Інші]</sys:String>
+    <sys:String x:Key="Tracker_Format" xml:space="preserve">Тип: {0}
+Дата: {2:dd.MM.yyyy}
+Кількість файлів: {4}        
+    </sys:String>
+
+    <!--FileItem.cs-->
+    <sys:String x:Key="Unit_Byte">Байт</sys:String>
+    <sys:String x:Key="Unit_KB">КБайт</sys:String>
+    <sys:String x:Key="Unit_MB">МБайт</sys:String>
+    <sys:String x:Key="Unit_GB">ГБайт</sys:String>
+    <sys:String x:Key="Unit_TB">ТБайт</sys:String>
+
+    <!--MainWindowViewModel.cs-->
+    <sys:String x:Key="FoldersExcluded_Title">Папки виключені</sys:String>
+    <sys:String x:Key="FoldersExcluded_Message">Наступні папки виключені (вони вкладені в інші вибрані):</sys:String>
+    <sys:String x:Key="ExportData_Title">Зберегти дані таблиці</sys:String>
+    <sys:String x:Key="ExportChart_Title">SЗберегти графік</sys:String>
+    <sys:String x:Key="ExportData_Filter">Текстові файли (*.txt)|*.txt</sys:String>
+
+    <!--MainWindow.xaml-->
+    <sys:String x:Key="Progress_Text">Йде аналіз, зачекайте...</sys:String>
+    <sys:String x:Key="FAQ_Title">Часті запитання (FAQ)</sys:String>
+    <sys:String x:Key="FAQ_Q1">1. Чому не показуються всі файли з диска С?</sys:String>
+    <sys:String x:Key="FAQ_A1">- Мі ігноруємо папки без доступу, щоб уникнути помилок та випадкового видалення важливих для роботи комп'ютера файлів.</sys:String>
+    <sys:String x:Key="FAQ_Q2">2. Як експортувати графік?</sys:String>
+    <sys:String x:Key="FAQ_A2">- Натисніть «Експорт графіків» під діаграмою. Буде збережено той графік на якому ви знаходитесь.</sys:String>
+    <sys:String x:Key="FAQ_Q3">3. Як можна взаємодіяти з таблицею?</sys:String>
+    <sys:String x:Key="FAQ_A3">- Потрібно натиснути правою кнопкою миші на файл, який вас цікавить, після чого відкриється оверлей, де вам дадуть вибрати відкрити папку, в якій знаходиться файл, або видалити файл прямо з програми. При видаленні зміниться і таблиця, і графіки. Також при збереженні таблиці дані будуть збережені в тому сортуванні, що було використано востаннє.</sys:String>
+    <sys:String x:Key="FAQ_Q4">4. Що робити, якщо щось не працює?</sys:String>
+    <sys:String x:Key="FAQ_A4">- Напишіть розробнику або перевірте FAQ знову.</sys:String>
+
+    <!--Тема-->
+    <sys:String x:Key="ThemeLabel">Тема</sys:String>
+    <sys:String x:Key="ThemeSuffix_Dark">Темна</sys:String>
+    <sys:String x:Key="ThemeSuffix_Light">Світла</sys:String>
+
+</ResourceDictionary>

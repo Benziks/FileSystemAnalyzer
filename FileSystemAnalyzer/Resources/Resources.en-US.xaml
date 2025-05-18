@@ -1,0 +1,125 @@
+﻿<!--Словарь для английского языка-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Головне меню-->
+    <sys:String x:Key="StartAnalysis">Start Analysis</sys:String>
+    <sys:String x:Key="Settings">Settings</sys:String>
+    <sys:String x:Key="Exit">Exit</sys:String>
+
+    <!--Налаштування-->
+    <sys:String x:Key="LanguageLabel">Language</sys:String>
+    <sys:String x:Key="ThemeButton">Change Theme</sys:String>
+    <sys:String x:Key="FAQ">FAQ</sys:String>
+    <sys:String x:Key="Back">Back</sys:String>
+
+    <!--Вибір аналізу-->
+    <sys:String x:Key="FullAnalysis">Full System Analysis</sys:String>
+    <sys:String x:Key="QuickAnalysis">Quick Analysis (Desktop and Downloads)</sys:String>
+    <sys:String x:Key="SelectiveAnalysis">Selective Analysis</sys:String>
+
+    <!--Діалогові вікна-->
+    <sys:String x:Key="SelectDrivesTitle">Select Drives</sys:String>
+    <sys:String x:Key="SelectFoldersTitle">Select Folders</sys:String>
+    <sys:String x:Key="SelectFormatsTitle">Choose formats to analyze</sys:String>
+
+    <!--Кнопки у діалогових вікнах-->
+    <sys:String x:Key="AnalyzeButton">Analyze</sys:String>
+    <sys:String x:Key="CancelButton">Cancel</sys:String>
+    <sys:String x:Key="SelectAll">Select All</sys:String>
+    <sys:String x:Key="ClearSelection">Clear Selection</sys:String>
+
+    <!--DataGrid колонки-->
+    <sys:String x:Key="ColumnName">Name</sys:String>
+    <sys:String x:Key="ColumnType">Type</sys:String>
+    <sys:String x:Key="ColumnSize">Size</sys:String>
+    <sys:String x:Key="ColumnCreation">Creation Date</sys:String>
+    <sys:String x:Key="ColumnAccess">Last Access</sys:String>
+    <sys:String x:Key="ColumnPath">Path</sys:String>
+
+    <!--Кнопки експорту та угруповання дублікатів-->
+    <sys:String x:Key="ExportData">Export Data (.txt)</sys:String>
+    <sys:String x:Key="ExportChart">Export Chart (.png)</sys:String>
+    <sys:String x:Key="GroupDuplicates">Group Duplicates</sys:String>
+
+    <!--DriveSelectionWindow.xaml-->
+    <sys:String x:Key="DrvSelect_Title">Select Drives</sys:String>
+    <sys:String x:Key="DrvSelect_Analyze">Analyze</sys:String>
+    
+    <!--DriveSelectionWindow.cs-->
+    <sys:String x:Key="Drv_NoChoice">You must select at least one drive.</sys:String>
+    <sys:String x:Key="Warning_Title">Warning</sys:String>
+
+    <!--FolderSelectionWindow.xaml-->
+    <sys:String x:Key="FldSelect_Title">Select Folders</sys:String>
+    <sys:String x:Key="FldSelect_Add">Add Folder</sys:String>
+    <sys:String x:Key="FldSelect_Remove">Remove Selected</sys:String>
+    <sys:String x:Key="FldSelect_Next">Continue</sys:String>
+
+    <!--FolderSelectionWindow.cs-->
+    <sys:String x:Key="FolderWindow_Title">Select Folders</sys:String>
+    <sys:String x:Key="Fld_NoChoice">You must select at least one folder.</sys:String>
+    <sys:String x:Key="Fld_NoFiles">Selected folders contain no files. Please add at least one folder with files</sys:String>
+
+    <!--FormatSelectionWindow.xaml-->
+    <sys:String x:Key="FmtSelect_Title">Choose Formats</sys:String>
+    <sys:String x:Key="FmtSelect_Header">Select formats to analyze:</sys:String>
+    <sys:String x:Key="FmtSelect_SelectAll">Select All</sys:String>
+    <sys:String x:Key="FmtSelect_Clear">Clear Selection</sys:String>
+    <sys:String x:Key="FmtSelect_Analyze">Analyze</sys:String>
+
+    <!--FormatSelectionWindow.cs-->
+    <sys:String x:Key="Fmt_NoChoice">Please select at least one format.</sys:String>
+    <sys:String x:Key="FormatWindow_Title">Choose Formats</sys:String>
+
+    <!--DialogService.cs / MainWindow.cs-->
+    <sys:String x:Key="Confirm_Title">Confirmation</sys:String>
+    <sys:String x:Key="OpenFolder">Open Folder</sys:String>
+    <sys:String x:Key="DeleteFile_Confirm">Delete file?</sys:String>
+    <sys:String x:Key="Context_OpenFolder">Open Folder</sys:String>
+    <sys:String x:Key="Context_DeleteFile">Delete File</sys:String>
+
+    <!--ChartService.cs-->
+    <sys:String x:Key="Chart_Bar_Title">File Type Distribution (MB)</sys:String>
+    <sys:String x:Key="Chart_Line_Title">File Creation Over Time</sys:String>
+    <sys:String x:Key="Axis_Size">MB</sys:String>
+    <sys:String x:Key="Axis_Count">File Count</sys:String>
+    <sys:String x:Key="Label_Missing">[Missing]</sys:String>
+    <sys:String x:Key="Label_Others">[Others]</sys:String>
+    <sys:String x:Key="Tracker_Format" xml:space="preserve">Type: {0}
+Date: {2:dd.MM.yyyy}
+File count: {4}        
+    </sys:String>
+
+    <!--FileItem.cs-->
+    <sys:String x:Key="Unit_Byte">Byte</sys:String>
+    <sys:String x:Key="Unit_KB">KByte</sys:String>
+    <sys:String x:Key="Unit_MB">MByte</sys:String>
+    <sys:String x:Key="Unit_GB">GByte</sys:String>
+    <sys:String x:Key="Unit_TB">TByte</sys:String>
+
+    <!--MainWindowViewModel.cs-->
+    <sys:String x:Key="FoldersExcluded_Title">Folders excluded</sys:String>
+    <sys:String x:Key="FoldersExcluded_Message">The following folders are exluded (they are nested within other selected ones):</sys:String>
+    <sys:String x:Key="ExportData_Title">Save table data</sys:String>
+    <sys:String x:Key="ExportChart_Title">Save graphic</sys:String>
+    <sys:String x:Key="ExportData_Filter">Text files (*.xtx)|*.txt</sys:String>
+
+    <!--MainWindow.xaml-->
+    <sys:String x:Key="Progress_Text">Analyzing, please wait...</sys:String>
+    <sys:String x:Key="FAQ_Title">Frequently Asked Questions</sys:String>
+    <sys:String x:Key="FAQ_Q1">1. Why don`t all files on drive C show up?</sys:String>
+    <sys:String x:Key="FAQ_A1">- We skip inaccessible folders to avoid errors and accidental deletion of critical system files.</sys:String>
+    <sys:String x:Key="FAQ_Q2">2. How to export a graph?</sys:String>
+    <sys:String x:Key="FAQ_A2">- Click "Export Charts" under the chart. The chart you are on will be saved.</sys:String>
+    <sys:String x:Key="FAQ_Q3">3. How can I interact with the table?</sys:String>
+    <sys:String x:Key="FAQ_A3">- You need to right-click on the file you are interested in, after which an overlay will open, where you will be given the option to open the folder where the file is located, or delete the file directly from the program. When deleting, both the table and the graphs will change. Also, when saving the table, the data will be saved in the sorting that was used last.</sys:String>
+    <sys:String x:Key="FAQ_Q4">4. What to do if something does not work?</sys:String>
+    <sys:String x:Key="FAQ_A4">- Write to the developer or check the FAQ again.</sys:String>
+
+    <!--Тема-->
+    <sys:String x:Key="ThemeLabel">Theme</sys:String>
+    <sys:String x:Key="ThemeSuffix_Dark">Dark</sys:String>
+    <sys:String x:Key="ThemeSuffix_Light">Light</sys:String>
+
+</ResourceDictionary>
