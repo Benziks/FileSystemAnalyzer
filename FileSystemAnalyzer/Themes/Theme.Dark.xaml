@@ -6,4 +6,4 @@
     <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FF1E1E1E"/>
     <SolidColorBrush x:Key="AppForegroundBrush" Color="White"/>
 
-</ResourceDictionary>
+</ResourceDictionary> 

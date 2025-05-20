@@ -45,6 +45,5 @@ namespace FileSystemAnalyzer.Models
                 DisplayName = displayName;
             }
         }
-
     }
 }
