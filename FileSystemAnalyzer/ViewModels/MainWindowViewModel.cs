@@ -23,8 +23,6 @@ namespace FileSystemAnalyzer.ViewModels
         private readonly IChartService _chartService;
         private readonly IDuplicateService _duplicateService;
 
-        Random random = new Random();
-
         private Dictionary<string, OxyColor> _typeColors = new Dictionary<string, OxyColor>();
         private bool _isLanguageOverlayVisible;
         private LanguageOption _selectedLanguageOption;
@@ -36,7 +34,6 @@ namespace FileSystemAnalyzer.ViewModels
         private int _currentChartIndex;
         private string _themeButtonText;
         private bool _isDarkTheme = true;
-        private string _themeSuffix;
 
         public bool IsLanguageOverlayVisible
         {
@@ -332,17 +329,21 @@ namespace FileSystemAnalyzer.ViewModels
 
         private async void ExecuteExportData()
         {
+            // Відкриваємо діалог збереження для текстового файлу (.txt)
             var path = await _dialogService.ShowSaveFileDialogAsync(
                 title: (string)System.Windows.Application.Current.FindResource("ExportData_Title"),
                 filter: (string)System.Windows.Application.Current.FindResource("ExportData_Filter"),
                 defaultExt: "txt",
                 defaultName: "FileSystemReport.txt");
-            if (string.IsNullOrEmpty(path))
-                return;  
 
+            // Якщо користувач скасував діалог або не вказав шлях - нічого не робимо
+            if (string.IsNullOrEmpty(path)) return;
+
+            // Отримуємо поточне подання колекції FileItems (враховуючи сортування і фільтрацію в DataGrid)
             var view = CollectionViewSource.GetDefaultView(FileItems);
             var sortedItems = view.Cast<FileItem>().ToList();
 
+            // Готуємо заголовки колонок, довантажені з ресурсів для локалізації
             var headers = new[] {
         (string)System.Windows.Application.Current.FindResource("ColumnName"),
         (string)System.Windows.Application.Current.FindResource("ColumnType"),
@@ -350,8 +351,11 @@ namespace FileSystemAnalyzer.ViewModels
         (string)System.Windows.Application.Current.FindResource("ColumnCreation"),
         (string)System.Windows.Application.Current.FindResource("ColumnAccess"),
         (string)System.Windows.Application.Current.FindResource("ColumnPath") };
+
+            // Створюємо структуру для зберігання всіх рядків, перший рядок це загаловки колонок
             var rows = new List<string[]> { headers };
 
+            // Додаємо до rows кожен FileItem у вигляді масиву рядків
             foreach (var item in sortedItems)
             {
                 rows.Add(new[]
@@ -365,20 +369,13 @@ namespace FileSystemAnalyzer.ViewModels
         });
             }
 
+            // Обчислюємо максимальну ширину кожного стовпця, щоб вирівняти дані
             int cols = headers.Length;
             var maxWidth = new int[cols];
             for (int c = 0; c < cols; c++)
                 maxWidth[c] = rows.Max(r => r[c]?.Length ?? 0);
 
-            var sb = new System.Text.StringBuilder();
-
-            foreach (var row in rows)
-            {
-                for (int c = 0; c < cols; c++)
-                    sb.Append((row[c] ?? "").PadRight(maxWidth[c] + 2));
-                sb.AppendLine();
-            }
-
+            // Викликаємо сервіс ExportData, передаючи список вирівняних рядків і шлях до файлу
             _exportService.ExportData(rows.Select(r => string.Join("", r.Select((cell, c) => cell.PadRight(maxWidth[c] + 2)))), path);
         }
 
@@ -387,13 +384,13 @@ namespace FileSystemAnalyzer.ViewModels
             if (ChartModel == null)
                 return;
 
+            // Відкриваємо діалог "Зберегти як" і отримуємо вибраний шлях
             var path = await _dialogService.ShowSaveFileDialogAsync(
                 title: (string)System.Windows.Application.Current.FindResource("ExportChart_Title"),
                 filter: "PNG Image|*.png",
                 defaultExt: "png",
                 defaultName: _currentChartIndex == 0 ? "bar_chart.png" : "line_chart.png");
-            if (string.IsNullOrEmpty(path))
-                return;
+            if (string.IsNullOrEmpty(path))return;
             _exportService.ExportChart(ChartModel, path, 800, 600);
         }
 
