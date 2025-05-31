@@ -117,22 +117,26 @@ namespace FileSystemAnalyzer
 
         private void ResultsDataGrid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
+            // Знаходимо контейнер рядка DataGridRow під курсором
             var dep = (DependencyObject)e.OriginalSource;
             while (dep != null && !(dep is DataGridRow))
                 dep = VisualTreeHelper.GetParent(dep);
             if (!(dep is DataGridRow row)) return;
 
+            // Виділяємо цей рядок
             row.IsSelected = true;
             if (!(row.Item is FileItem item)) return;
 
+            // Створюємо нове контексте меню та додаємо до нього пункти "Відкрити папку" та "Видалити файл"
             var cm = new ContextMenu();
             var miOpen = new MenuItem { Header = (string)FindResource("Context_OpenFolder") };
             miOpen.Click += (_, __) => OpenFolder(item);
             var miDel = new MenuItem { Header = (string)FindResource("Context_DeleteFile") };
             miDel.Click += (_, __) => DeleteFile(item);
+
+            // Додаємо пункти до меню, прив'язуємо до рядка та відкриваємо його
             cm.Items.Add(miOpen);
             cm.Items.Add(miDel);
-
             row.ContextMenu = cm;
             cm.IsOpen = true;
             e.Handled = true;
@@ -147,20 +151,22 @@ namespace FileSystemAnalyzer
                 UseShellExecute = true
             });
         }
-
         private void DeleteFile(FileItem item)
         {
+            // Формуємо повідомлення для підтвердження з локалізованим текстом
             var text = (string)FindResource("DeleteFile_Confirm") + "\n" + item.FullPath;
             var caption = (string)FindResource("Confirm_Title");
-            if (System.Windows.MessageBox.Show(text, caption, MessageBoxButton.YesNo, MessageBoxImage.Warning)
-                != MessageBoxResult.Yes) return;
 
-            FileSystem.DeleteFile(item.FullPath,
-                                  UIOption.OnlyErrorDialogs,
-                                  RecycleOption.SendToRecycleBin);
+            // Відображаємо вікно підтвердження. Якщо користувач вибрав "Ні" - повертаємось
+            if (System.Windows.MessageBox.Show(text, caption, MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
 
+            // Використовуємо Filesystem.DeleteFile для безпечного видалення
+            FileSystem.DeleteFile(item.FullPath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+
+            // Видаляємо елемент з колекції, щоб оновити інтерфейс
             _fileItems.Remove(item);
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

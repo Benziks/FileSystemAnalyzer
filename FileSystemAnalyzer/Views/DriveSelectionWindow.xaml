@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{DynamicResource DrvSelect_Title}" Height="300" Width="250" WindowStartupLocation="CenterOwner">
     <DockPanel Margin="10">
+        
+        <!-- Список дисків з можливістю мальтивибору -->
         <ListBox ItemsSource="{Binding Drives}" SelectionMode="Multiple" DockPanel.Dock="Top">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -10,6 +12,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        
+        <!-- Кнопки підтвердження та відміни -->
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,10,0,0">
             <Button Content="{DynamicResource DrvSelect_Analyze}" Height="50" Width="75" Margin="5" Command="{Binding ConfirmCommand}"/>
             <Button Content="{DynamicResource Back}" Height="50" Width="75" Margin="5" Command="{Binding CancelCommand}"/>

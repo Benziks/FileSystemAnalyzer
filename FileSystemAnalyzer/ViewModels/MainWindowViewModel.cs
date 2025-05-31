@@ -404,19 +404,24 @@ namespace FileSystemAnalyzer.ViewModels
             var view = CollectionViewSource.GetDefaultView(FileItems);
             view.SortDescriptions.Clear();
 
-            var snapshot = FileItems.ToList();
+            // Очищаємо попереднє групування і формуємо новий порядок
+            var snapshot = FileItems.ToList(); // Копіюємо поточний список файлів
             var reordered = await Task.Run(() =>
                 _duplicateService.GroupDuplicates(snapshot).ToList()
             );
 
+            // Відписуємося від події, щоб тимчасово уникнути дублюючого оновлення
             FileItems.CollectionChanged -= OnFileItemsChanged;
 
+            // Очищаємо поточну колекцію та додаємо елементи в новому порядку
             FileItems.Clear();
             foreach (var f in reordered)
                 FileItems.Add(f);
 
+            //Після перезавантаження колекції знову підписуємося на подію зміни
             FileItems.CollectionChanged += OnFileItemsChanged;
 
+            // Позначаємо кожен дубльований рядок однаковим кольором
             _duplicateService.MarkDuplicates(FileItems);
         }
 

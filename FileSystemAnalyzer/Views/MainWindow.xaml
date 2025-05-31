@@ -13,21 +13,18 @@
     </Window.Resources>
 
     <Grid>
+        <!-- Оверлей для індикації процесу аналізу-->
         <Grid x:Name="ProgressPanel"
           Background="#DD1E1E1E"
           Visibility="{Binding IsAnalyzing, Converter={StaticResource BoolToVis}}"
           Panel.ZIndex="101">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="{DynamicResource Progress_Text}"
-                    Foreground="{DynamicResource AppForegroundBrush}"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,10"/>
-                <ProgressBar x:Name="GlobalProgressBar"
-                     Width="970" Height="20"
-                     Minimum="0" Maximum="100"
-                     IsIndeterminate="False"
-                     Value="{Binding ProgressValue}"/>
+                
+                <!-- Текст підказка під час аналізу -->
+                <TextBlock Text="{DynamicResource Progress_Text}" Foreground="{DynamicResource AppForegroundBrush}" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                
+                <!-- Індикатор прогресу аналізу -->
+                <ProgressBar x:Name="GlobalProgressBar" Width="970" Height="20" Minimum="0" Maximum="100" IsIndeterminate="False" Value="{Binding ProgressValue}"/>
             </StackPanel>
         </Grid>
 
@@ -51,7 +48,7 @@
                 </StackPanel>
             </Border>
         </Grid>
-       
+
         <Grid x:Name="MainMenuPanel" Panel.ZIndex="0" av:IsHidden="True" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -125,15 +122,19 @@
                 <Button Content="{DynamicResource Back}"   Width="200" Height="50" Margin="0,10" Click="SettingsBack_Click"/>
             </StackPanel>
         </Grid>
-        
+
         <Grid x:Name="AnalysisModePanel" Visibility="Collapsed" Panel.ZIndex="2" >
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <!-- Аналіз усієї системи -->
                 <Button Content="{DynamicResource FullAnalysis}" Width="270" Height="50" Margin="0,10"
             Command="{Binding FullAnalysisCommand}"/>
+                <!-- Швидкий аналіз (Робочий стіл та Завантаження) -->
                 <Button Content="{DynamicResource QuickAnalysis}" Width="270" Height="50" Margin="0,10"
             Command="{Binding QuickAnalysisCommand}"/>
+                <!-- Вибірковий аналіз за обраними папками та форматами -->
                 <Button Content="{DynamicResource SelectiveAnalysis}" Width="270" Height="50" Margin="0,10"
             Command="{Binding SelectiveAnalysisCommand}"/>
+                <!-- Повернутися назад до головного меню -->
                 <Button Content="{DynamicResource Back}" Width="270" Height="50" Margin="20,30,20,0"
             Click="AnalysisBack_Click"/>
             </StackPanel>
@@ -149,22 +150,19 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <DataGrid x:Name="ResultsDataGrid"
-                      ItemsSource="{Binding FileItems}"
-          Grid.Row="0" Grid.Column="2"
-          AutoGenerateColumns="False"
-          CanUserAddRows="False"
-          IsReadOnly="True"
+            <DataGrid x:Name="ResultsDataGrid" ItemsSource="{Binding FileItems}" Grid.Row="0" Grid.Column="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
           ScrollViewer.VerticalScrollBarVisibility="Auto"
           ScrollViewer.HorizontalScrollBarVisibility="Auto"
           MouseRightButtonUp="ResultsDataGrid_MouseRightButtonUp">
+                <!-- Підсвітка рядків за допомогою властивості RowColor-->
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="{Binding RowColor}" />
                     </Style>
                 </DataGrid.RowStyle>
-
+                <!-- Всі колонки зроблено вручну, щоб мати повний контроль над підписами та форматуванням-->
                 <DataGrid.Columns>
+                    <!-- Ім'я файлу-->
                     <DataGridTextColumn  Binding="{Binding Name}" Width="Auto">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -172,7 +170,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-
+                    <!-- Розширення(тип) файлу-->
                     <DataGridTextColumn  Binding="{Binding Extension}" Width="Auto">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -180,7 +178,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-
+                    <!-- Розмір файлу-->
                     <DataGridTextColumn  Binding="{Binding FormattedSize}" SortMemberPath="Size" >
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -188,7 +186,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-
+                    <!-- Дата створення-->
                     <DataGridTextColumn  Binding="{Binding CreationTime, StringFormat=\{0:dd\.MM\.yyyy\}}" Width="Auto">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -196,7 +194,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-
+                    <!-- Дата останнбого доступу-->
                     <DataGridTextColumn  Binding="{Binding LastAccessTime, StringFormat=\{0:dd\.MM\.yyyy\}}" Width="Auto">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -204,7 +202,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-
+                    <!-- Повний шлях до файлу-->
                     <DataGridTextColumn  Binding="{Binding FullPath}" Width="Auto">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

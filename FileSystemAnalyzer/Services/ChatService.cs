@@ -18,21 +18,23 @@ namespace FileSystemAnalyzer.Services
         //Создає стовпчикову діаграму з даними про файли
         public PlotModel CreateBarChart(IEnumerable<FileItem> items)
         {
-            // Перевіряє, чи є дані для побудови графіка
+            // Групуємо за розширенням, замінюючи порожні на "[Відсутні]"
             var data = items.GroupBy(f => string.IsNullOrEmpty(f.Extension) ? (string)System.Windows.Application.Current.FindResource("Label_Missing") : f.Extension).ToDictionary(g => g.Key, g => g.Sum(f => f.Size) / 1024.0 / 1024.0);
 
-            //Топ‑49 + "[Інші]"
+            //Вибираємо топ‑49 типів, інші в одну групу "[Інші]"
             var top = TopAndOthers(data, MaxTopFileTypes, (string)System.Windows.Application.Current.FindResource("Label_Others"));
+            //Перетворюэмо в список ыз сортуванням за обсягом
             var groups = top.Select(kv => new { Ext = kv.Key, Size = Math.Round(kv.Value, 2) }).OrderByDescending(x => x.Size).ToList();
+            //Налаштовуємо модель графіка
             var model = new PlotModel { Title = (string)System.Windows.Application.Current.FindResource("Chart_Bar_Title") };
-            //Вісь категорій зліва Extension
+            //Додаємо категорійну вісь зліва для типів файлів
             model.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Left,
                 ItemsSource = groups.Select(x => x.Ext).ToArray(),
                 GapWidth = 0.5
             });
-            //Вісь кількості файлів знизу
+            //Додаємо числову віс знизу для розміру файлів
             model.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
@@ -41,6 +43,7 @@ namespace FileSystemAnalyzer.Services
                 IsPanEnabled = false,
                 IsZoomEnabled = false
             });
+            //Створюємо серію стовпців
             var series = new BarSeries { LabelPlacement = LabelPlacement.Inside };
             
             foreach (var g in groups)
@@ -65,23 +68,23 @@ namespace FileSystemAnalyzer.Services
             var list = items.ToList();
             var model = new PlotModel { Title = (string)System.Windows.Application.Current.FindResource("Chart_Line_Title") };
             if (!list.Any()) return model;
-
+            // Групуємо файли за розширенням і підраховуємо загальну кількість
             var raw = list.GroupBy(f => string.IsNullOrEmpty(f.Extension) ? (string)System.Windows.Application.Current.FindResource("Label_Missing") : f.Extension).ToDictionary(g => g.Key, g => (double)g.Count());
-
+            // Топ-49 та "[Інші]"
             var top = TopAndOthers(raw, MaxTopFileTypes, (string)System.Windows.Application.Current.FindResource("Label_Others"));
 
             var exts = top.Keys.ToList();
 
-            
+            // Визначаємо період сканування 
             var min = list.Min(f => f.CreationTime);
             var max = list.Max(f => f.CreationTime);
-            // Перевіряє, чи потрібно групувати дані за місяцями або днями. Якщо різниця між максимальним і мінімальним значеннями перевищує 90 днів, то групує за місяцями
-            bool byMonth = (max - min).TotalDays > MonthGroupingThresholdDays;
             
+            bool byMonth = (max - min).TotalDays > MonthGroupingThresholdDays;
+            // Функція групування дат (щодня або щомісяця)
             Func<FileItem, DateTime> grp = byMonth ? (f => new DateTime(f.CreationTime.Year, f.CreationTime.Month, 1)) : (f => f.CreationTime.Date);
 
             var dates = list.Select(grp).Distinct().OrderBy(d => d).ToList();
-
+            // Створення серії для кожного типу файлів
             foreach (var ext in exts)
             {
                 if (!_typeColors.ContainsKey(ext))
@@ -89,7 +92,7 @@ namespace FileSystemAnalyzer.Services
                         (byte)_rnd.Next(50, 200),
                         (byte)_rnd.Next(50, 200),
                         (byte)_rnd.Next(50, 200));
-                // Створює нову лінійну серію для кожного типу файлу
+              
                 var s = new LineSeries
                 {
                     Title = ext,
@@ -99,8 +102,9 @@ namespace FileSystemAnalyzer.Services
                     TrackerFormatString = (string)System.Windows.Application.Current.FindResource("Tracker_Format"),
                     CanTrackerInterpolatePoints = false
                 };
-                //Точки на графіку
+                //Підраховуємо кількість файлів на кожну дату
                 var counts = list.Where(f => (string.IsNullOrEmpty(f.Extension) ? (string)System.Windows.Application.Current.FindResource("Label_Missing") : f.Extension) == ext).GroupBy(grp).ToDictionary(g => g.Key, g => g.Count());
+                // Додаємо точки на графік
                 foreach (var d in dates)
                     s.Points.Add(new DataPoint(DateTimeAxis.ToDouble(d), counts.TryGetValue(d, out var c) ? c : 0));
                 model.Series.Add(s);

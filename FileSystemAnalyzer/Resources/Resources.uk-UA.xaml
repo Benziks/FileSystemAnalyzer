@@ -102,7 +102,7 @@
     <sys:String x:Key="FoldersExcluded_Title">Папки виключені</sys:String>
     <sys:String x:Key="FoldersExcluded_Message">Наступні папки виключені (вони вкладені в інші вибрані):</sys:String>
     <sys:String x:Key="ExportData_Title">Зберегти дані таблиці</sys:String>
-    <sys:String x:Key="ExportChart_Title">SЗберегти графік</sys:String>
+    <sys:String x:Key="ExportChart_Title">Зберегти графік</sys:String>
     <sys:String x:Key="ExportData_Filter">Текстові файли (*.txt)|*.txt</sys:String>
 
     <!--MainWindow.xaml-->
